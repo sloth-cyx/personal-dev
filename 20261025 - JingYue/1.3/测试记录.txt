@@ -1,0 +1,36 @@
+PASS: Markdown blocks
+PASS: GB18030 auto detection
+PASS: UTF16 BOM
+PASS: Long lines / surrogate preservation
+PASS: 180000 paragraph import
+Large file: 19508890 bytes, 225 ms
+PASS: Empty document
+PASS: Reading state persistence
+PASS: EPUB metadata
+PASS: EPUB spine order, EPUB3 navigation and all paragraphs
+PASS: HTML scripts/head ignored, entities decoded
+PASS: EPUB2 NCX / fragment targets without heading tags
+PASS: HTML import / headings / line breaks
+PASS: FB2 metadata / body / chapters
+PASS: DOCX paragraph and heading import
+PASS: Content deduplication preserves progress
+PASS: Persistent library works after source removal
+PASS: Reading location / offset / chapter / bookmarks survive restart
+PASS: Library has no 30-book history eviction
+PASS: Atomic index backup recovery
+PASS: Delete removes owned copy / progress, preserves source, survives restart
+PASS: Reimport deleted book starts with fresh progress
+PASS: Deletion preserves copies referenced by another record
+PASS: Legacy / outside-library source paths never deleted
+PASS: Failed index save rolls back deletion
+PASS: Old default migrates to KaiTi
+PASS: Explicit font preference preserved after migration
+PASS: EPUB raster / SVG-wrapper images retain existing text indices
+PASS: Lazy image decoding / frozen memory cache
+PASS: DOCX DrawingML / VML images with stable text anchors
+PASS: Rounded search and thin scrollbar templates load
+SAMPLE: 《花嫁》 至洊雷篇06.epub | 1,421,919 bytes | 1,028,340 chars | 20,062 paragraphs | 33 chapters | 164 ms
+SAMPLE: 诡秘之主.txt | 14,467,723 bytes | 5,486,313 chars | 118,756 paragraphs | 1,409 chapters | 195 ms
+SAMPLE: 诡秘之主_章节排版版.docx | 5,962,256 bytes | 4,528,931 chars | 117,302 paragraphs | 1,463 chapters | 540 ms
+SAMPLE: 黎明之剑.txt | 19,896,311 bytes | 7,124,977 chars | 89,740 paragraphs | 1,595 chapters | 162 ms
+SAMPLE: 黎明之剑_章节排版版.docx | 8,293,014 bytes | 6,397,867 chars | 88,141 paragraphs | 1,601 chapters | 488 ms

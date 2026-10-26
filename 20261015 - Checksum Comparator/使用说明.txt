@@ -1,0 +1,22 @@
+Checksum Comparator · Windows 便携版
+
+双击 ChecksumComparator.exe 即可运行，不需要安装或管理员权限。
+需要 Windows 的 .NET Framework 4.5 或更高版本（Windows 10 / 11 通常已包含）。
+
+1. 比较两个文件：选择或拖入 A、B，默认使用 SHA-256。
+   将两个文件一起拖入 A 输入框可同时填入 A 和 B。
+2. 验证已知校验值：选择文件 A，粘贴纯十六进制校验值，选择对应算法。
+3. 比较 ZIP / JAR 内部内容：按完整路径和解压后 SHA-256 比较，列出新增、仅 A 有、修改项。
+   忽略压缩方式、时间戳、顺序及 ZIP 元数据；包含空目录项，路径大小写敏感。
+   不递归展开嵌套压缩包；不验证 JAR 签名。重复路径会报错，避免误判。
+   加密或不支持的压缩格式会报错。
+
+处理全程在本地，不上传文件。大文件和大型压缩包可能耗时，可点击取消。
+比较期间请勿修改输入文件。文件内容一致不代表文件可信或安全。
+MD5 和 SHA-1 仅用于兼容旧校验值，安全验证推荐 SHA-256。
+
+本程序未进行商业代码签名；Windows 可能提示发布者未知。
+附带完整 C# 源码，可自行审查及重新编译。
+
+编译（在本目录使用 PowerShell）：
+& C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /target:winexe /out:ChecksumComparator.exe /reference:System.IO.Compression.dll /reference:System.Windows.Forms.dll /reference:System.Drawing.dll ChecksumComparator.cs

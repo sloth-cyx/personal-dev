@@ -1,0 +1,44 @@
+PASS: Markdown blocks
+PASS: GB18030 auto detection
+PASS: UTF16 BOM
+PASS: Long lines / surrogate preservation
+PASS: 180000 paragraph import
+Large file: 19508890 bytes, 223 ms
+PASS: Empty document
+PASS: Reading state persistence
+PASS: EPUB metadata
+PASS: EPUB spine order, EPUB3 navigation and all paragraphs
+PASS: HTML scripts/head ignored, entities decoded
+PASS: EPUB2 NCX / fragment targets without heading tags
+PASS: HTML import / headings / line breaks
+PASS: FB2 metadata / body / chapters
+PASS: DOCX paragraph and heading import
+PASS: Content deduplication preserves progress
+PASS: Persistent library works after source removal
+PASS: Reading location / offset / chapter / bookmarks survive restart
+PASS: Library has no 30-book history eviction
+PASS: Atomic index backup recovery
+PASS: Delete removes owned copy / progress, preserves source, survives restart
+PASS: Reimport deleted book starts with fresh progress
+PASS: Deletion preserves copies referenced by another record
+PASS: Legacy / outside-library source paths never deleted
+PASS: Failed index save rolls back deletion
+PASS: Old default migrates to KaiTi
+PASS: Explicit font preference preserved after migration
+PASS: EPUB raster / SVG-wrapper images retain existing text indices
+PASS: Lazy image decoding / frozen memory cache
+PASS: DOCX DrawingML / VML images with stable text anchors
+PASS: Rounded search and thin scrollbar templates load
+PASS: DOCX custom style outline level and inherited heading
+PASS: Direct body-level override / cyclic style inheritance
+PASS: Image dimensions available before decoding for stable layout
+PASS: Each picture is an independent virtualized unit
+PASS: Logical paragraph plus visual part restores exact image/text position
+PASS: Pagination covers every character and image exactly once
+PASS: Previous page works from an arbitrary saved position
+PASS: Long paragraph pagination preserves emoji and has no omissions
+PASS: Reading mode, image position, character offset and progress persist
+PASS: Image decode and recycling do not change reserved layout height
+PASS: Twenty trailing pictures are separate units with five custom-style headings
+PASS: Portrait image including caption and margins fits one page
+SAMPLE: 9921d9197a4d78b1a742c8eeae8df7bb8177ff2119ed621e99d47282853ea6ad.docx | 8,816,879 bytes | 19,406 chars | 554 paragraphs | 5 chapters | 12 ms

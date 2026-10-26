@@ -1,0 +1,1 @@
+39 checks passed: 36 transparent renders, screen bounds, negative monitor coordinates, native window + character switching.
