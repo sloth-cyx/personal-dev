@@ -1,0 +1,36 @@
+Note: C:\Users\raymo\Documents\Codex\2026-10-25\xian\work\JingYueAndroid\src\com\jingyue\reader\MainActivity.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+ 'classes.dex'...
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=JingYue Local Release, O=JingYue, C=MY
+Signer #1 certificate SHA-256 digest: f4144a998fb461eb8d0556335f0e38609dd88d330f63f4726225774e53445058
+Signer #1 certificate SHA-1 digest: 125777216596c8b2dca1c991ad2115770426cae2
+Signer #1 certificate MD5 digest: f5b57b68bacf0d06633728be3c9656bb
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: 511555c49c1bdba6b3532a5dacb099bccd2dc0f40e82934a808bea3c5b435614
+Signer #1 public key SHA-1 digest: 08dce95c69ee15b72fc3d7109ee0fc5972c54f09
+Signer #1 public key MD5 digest: 2909aa3edc547538ab08c37bc128b259
+package: name='com.jingyue.reader' versionCode='10001' versionName='1.0.1' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
+sdkVersion:'26'
+targetSdkVersion:'35'
+application-label:'静阅'
+application-icon-160:'res/drawable/icon.xml'
+application: label='静阅' icon='res/drawable/icon.xml'
+launchable-activity: name='com.jingyue.reader.MainActivity'  label='' icon=''
+feature-group: label=''
+  uses-feature: name='android.hardware.faketouch'
+  uses-implied-feature: name='android.hardware.faketouch' reason='default feature for all apps'
+main
+other-activities
+supports-screens: 'small' 'normal' 'large' 'xlarge'
+supports-any-density: 'true'
+locales: '--_--'
+densities: '160'

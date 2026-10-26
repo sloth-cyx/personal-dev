@@ -1,0 +1,25 @@
+PASS UTF-8 text and chapter detection
+PASS GB18030 detection and exact text
+PASS UTF-16 BOM
+PASS long-line splitting preserves surrogate pairs
+PASS Markdown headings and readable links
+PASS EPUB metadata and spine text
+PASS EPUB3 navigation fragment anchors
+PASS DOCX inherited custom heading and body override
+PASS FB2 body and title
+PASS HTML text and script removal
+PASS 180000 paragraphs streamed and indexed
+PASS random read at end of long book
+LONG_IMPORT_MS 217
+PASS real sample 《花嫁》 至洊雷篇06.epub
+SAMPLE 《花嫁》 至洊雷篇06.epub blocks=20062 headings=34 images=0 ms=364
+PASS real sample 诡秘之主.txt
+SAMPLE 诡秘之主.txt blocks=118756 headings=1409 images=0 ms=418
+PASS real sample 诡秘之主_章节排版版.docx
+SAMPLE 诡秘之主_章节排版版.docx blocks=117302 headings=1463 images=0 ms=729
+PASS real sample 黎明之剑.txt
+SAMPLE 黎明之剑.txt blocks=89740 headings=1595 images=0 ms=282
+PASS real sample 黎明之剑_章节排版版.docx
+SAMPLE 黎明之剑_章节排版版.docx blocks=88141 headings=1601 images=0 ms=590
+PASS sample files were actually tested
+ALL 18 CHECKS PASSED

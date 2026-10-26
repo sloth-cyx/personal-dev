@@ -1,0 +1,12 @@
+PASS focused search has one border and one clear control 320
+PASS focused search has one border and one clear control 393
+PASS short handle drag springs back and retains panel scroll
+PASS dragging the handle dismisses scrolled settings
+PASS cancelled touch springs back
+PASS handle tap also closes
+PASS toc content scrolls and handle closes
+PASS marks content scrolls and handle closes
+PASS find content scrolls and handle closes
+PASS license content scrolls and handle closes
+PASS opening another panel cancels a pending dismissal
+ALL MOBILE PANEL CHECKS PASSED

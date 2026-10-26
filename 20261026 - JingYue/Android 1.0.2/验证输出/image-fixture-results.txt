@@ -1,0 +1,27 @@
+PASS UTF-8 text and chapter detection
+PASS GB18030 detection and exact text
+PASS UTF-16 BOM
+PASS long-line splitting preserves surrogate pairs
+PASS Markdown headings and readable links
+PASS EPUB metadata and spine text
+PASS EPUB3 navigation fragment anchors
+PASS DOCX inherited custom heading and body override
+PASS FB2 body and title
+PASS HTML text and script removal
+PASS 180000 paragraphs streamed and indexed
+PASS random read at end of long book
+LONG_IMPORT_MS 503
+PASS real sample test-results.txt
+SAMPLE test-results.txt blocks=43 headings=0 images=0 ms=38
+PASS real sample 使用说明.md
+SAMPLE 使用说明.md blocks=48 headings=11 images=0 ms=23
+PASS real sample 初次见面.md
+SAMPLE 初次见面.md blocks=27 headings=6 images=0 ms=27
+PASS real sample 图文示例.epub
+SAMPLE 图文示例.epub blocks=407 headings=2 images=3 ms=73
+PASS real sample 末尾插图回归测试.docx
+SAMPLE 末尾插图回归测试.docx blocks=75 headings=5 images=20 ms=52
+PASS real sample 测试书.epub
+SAMPLE 测试书.epub blocks=404 headings=2 images=0 ms=54
+PASS sample files were actually tested
+ALL 19 CHECKS PASSED
