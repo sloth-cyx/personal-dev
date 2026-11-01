@@ -1,0 +1,7 @@
+PASS hidden scrollbar and touch scrolling 320x568
+PASS hidden scrollbar and touch scrolling 393x851
+PASS toc hidden scrollbar and two-way touch scrolling
+PASS marks hidden scrollbar and two-way touch scrolling
+PASS find hidden scrollbar and two-way touch scrolling
+PASS license hidden scrollbar and two-way touch scrolling
+PASS shared panels hide scrollbar; no script errors

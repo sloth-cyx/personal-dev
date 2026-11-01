@@ -1,0 +1,27 @@
+PASS continuous reading position persists
+PASS global bookmark returns to exact block
+PASS image tail can scroll upwards without snapping back
+PAGING_GEOMETRY {
+  w: 393,
+  scroll: 11766,
+  pages: 30,
+  r: {
+    x: 0,
+    y: 67,
+    width: 393,
+    height: 723,
+    top: 67,
+    right: 393,
+    bottom: 790,
+    left: 0
+  }
+}
+PAGE_RESTORE { position: 23, fraction: 0.06666666666666667 } { position: 23, fraction: 0.06666666666666667 }
+PASS paging forward and restored position
+PASS image pages reach a finite final page
+PASS landscape without viewport overflow
+PASS touch swipe turns the page
+PASS dedicated buttons enter and leave fullscreen
+PASS page chunk boundaries have no skipped blocks
+PASS book deletion confirmation and empty library
+ALL BROWSER CHECKS PASSED

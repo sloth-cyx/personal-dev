@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
@@ -63,6 +63,7 @@ public class MainForm : Form {
     Button run = new Button(), cancel = new Button(); Label state = new Label(); ProgressBar progress = new ProgressBar();
     CancellationTokenSource cancellation; TableLayoutPanel input;
     public MainForm() {
+        Icon = new Icon(typeof(MainForm).Assembly.GetManifestResourceStream("AppIcon.ico"));
         Text = "Checksum Comparator"; Size = new Size(920,710); MinimumSize = new Size(720,590);
         StartPosition = FormStartPosition.CenterScreen; Font = new Font("Microsoft YaHei UI", 10); BackColor = Color.FromArgb(244,247,251);
         var root = new TableLayoutPanel { Dock=DockStyle.Fill, Padding=new Padding(24), ColumnCount=1, RowCount=6 };

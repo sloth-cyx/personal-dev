@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -87,6 +87,7 @@ class PetForm:Form {
     Random random=new Random();bool held,dragged,sleep,autoSleep;Point mouseOffset,press;int direction=1,ticks,actionUntil,decision=150;double phase,fallSpeed;bool falling;
     Picker picker;ToolStripMenuItem roamItem,topItem,sleepItem,hideItem;
     public PetForm(Preferences p) {
+        Icon = new Icon(typeof(PetForm).Assembly.GetManifestResourceStream("AppIcon.ico"));
         prefs=p;FormBorderStyle=FormBorderStyle.None;ShowInTaskbar=false;StartPosition=FormStartPosition.Manual;
         Text="Desktop Companions";TopMost=p.Top;Size=new Size(p.Sizes[p.Pet],p.Sizes[p.Pet]);
         SetSavedPosition();
@@ -99,7 +100,7 @@ class PetForm:Form {
         menu.Items.Add("找回宠物（移到主屏）",null,delegate{BringHome();});
         hideItem=new ToolStripMenuItem("隐藏宠物");hideItem.Click+=delegate{ToggleVisible();};menu.Items.Add(hideItem);
         menu.Items.Add(new ToolStripSeparator());menu.Items.Add("退出",null,delegate{Close();});
-        tray=new NotifyIcon {Icon=SystemIcons.Information,Text="桌面伙伴 · 右键管理 / 双击选角色",Visible=true,ContextMenuStrip=menu};tray.DoubleClick+=delegate{OpenPicker();};
+        tray=new NotifyIcon {Icon=this.Icon,Text="桌面伙伴 · 右键管理 / 双击选角色",Visible=true,ContextMenuStrip=menu};tray.DoubleClick+=delegate{OpenPicker();};
         MouseDown+=Down;MouseMove+=MovePet;MouseUp+=Up;
         timer.Interval=40;timer.Tick+=delegate{Animate();};timer.Start();
         Shown+=delegate{PaintPet();OpenPicker();};
@@ -138,7 +139,7 @@ class PetForm:Form {
 }
 
 class Picker:Form {
-    public Picker(PetForm pet,Preferences prefs){Text="桌面伙伴 · 选择角色";Size=new Size(750,410);MinimumSize=MaximumSize=Size;StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(247,245,252);Font=new Font("Microsoft YaHei UI",10);MaximizeBox=false;
+    public Picker(PetForm pet,Preferences prefs){Icon=pet.Icon;Text="桌面伙伴 · 选择角色";Size=new Size(750,410);MinimumSize=MaximumSize=Size;StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(247,245,252);Font=new Font("Microsoft YaHei UI",10);MaximizeBox=false;
         var title=new Label {Text="今天想和谁一起？",Font=new Font(Font.FontFamily,18,FontStyle.Bold),Location=new Point(24,18),AutoSize=true};Controls.Add(title);
         string[] descriptions={"像素小猫 · 活泼好奇","银发少女 · 温柔陪伴","果冻史莱姆 · 弹跳软萌"};
         for(int i=0;i<3;i++){int index=i;var panel=new Panel {Location=new Point(20+i*238,65),Size=new Size(226,246),BackColor=Color.White};

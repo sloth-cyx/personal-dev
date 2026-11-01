@@ -1,0 +1,11 @@
+PASS scroll-mode taps have no action
+PASS scroll fullscreen uses only explicit entry and exit controls without covering text
+PASS page animation saves the target position during motion
+PASS rapid page turns retain their final reading position
+PASS fullscreen paging keeps left/right taps and Android Back exits fullscreen
+PASS bottom sheets slide up when opened
+PASS close button slides the sheet down before hiding
+PASS backdrop and Android Back use the same closing animation
+PASS interrupted menu animations do not close a newer menu
+PASS reduced-motion preference disables optional animations
+ALL READING INTERACTION AND MOTION CHECKS PASSED

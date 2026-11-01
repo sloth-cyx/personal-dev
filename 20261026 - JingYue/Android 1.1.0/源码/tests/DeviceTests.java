@@ -1,0 +1,25 @@
+package com.jingyue.reader;
+import android.app.*;import android.content.*;import android.net.*;import android.os.*;import android.webkit.*;import java.lang.reflect.*;import java.util.concurrent.*;import org.json.*;
+public final class DeviceTests extends Instrumentation {
+  MainActivity activity;WebView web;int checks=0;
+  @Override public void onCreate(Bundle args){super.onCreate(args);start();}
+  void launch()throws Exception{Intent i=new Intent().setComponent(new ComponentName("com.jingyue.reader","com.jingyue.reader.MainActivity")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);activity=(MainActivity)startActivitySync(i);Field f=MainActivity.class.getDeclaredField("web");f.setAccessible(true);web=(WebView)f.get(activity);waitFor("typeof window.receive==='function'",60000);}
+  String js(String code)throws Exception {CountDownLatch done=new CountDownLatch(1);String[] value={""};runOnMainSync(()->web.evaluateJavascript(code,r->{value[0]=r;done.countDown();}));if(!done.await(30,TimeUnit.SECONDS))throw new Exception("JS timeout: "+code);return value[0];}
+  void waitFor(String expression,int ms)throws Exception{long limit=System.currentTimeMillis()+ms;while(System.currentTimeMillis()<limit){if("true".equals(js(expression)))return;Thread.sleep(250);}throw new Exception("Timed out: "+expression+" -> "+js(expression));}
+  void check(String expression,String label)throws Exception{if(!"true".equals(js(expression)))throw new Exception("FAIL "+label+": "+js(expression));checks++;Bundle b=new Bundle();b.putString("stream","PASS "+label+"\n");sendStatus(0,b);}
+  void importFile(String name)throws Exception{Method m=MainActivity.class.getDeclaredMethod("onActivityResult",int.class,int.class,Intent.class);m.setAccessible(true);Intent i=new Intent().setData(Uri.parse("content://com.jingyue.reader.tests.files/"+name));runOnMainSync(()->{try{m.invoke(activity,100,Activity.RESULT_OK,i);}catch(Exception e){throw new RuntimeException(e);}});}
+  @Override public void onStart(){Bundle result=new Bundle();try{
+    launch();check("document.querySelector('#home')!==null","Android WebView starts offline");
+    importFile("long.txt");waitFor("JSON.parse(Native.library()).books.some(b=>b.title==='long')",120000);check("JSON.parse(Native.library()).books.find(b=>b.title==='long').count===610","system content URI import and streamed index");
+    int before=Integer.parseInt(js("JSON.parse(Native.library()).books.length"));importFile("long.txt");waitFor("document.querySelector('#busy').classList.contains('hidden')",60000);check("JSON.parse(Native.library()).books.length==="+before,"duplicate import retains library");
+    js("openBook(JSON.parse(Native.library()).books.find(b=>b.title==='long').id)");waitFor("!restoring&&current!==null",10000);check("content.children.length<=80","bounded reading DOM");js("loadWindow(250,.3)");waitFor("!restoring",10000);js("savePosition()");check("JSON.parse(Native.library()).books.find(b=>b.title==='long').position===250","reading position saved through native bridge");
+    js("markCurrent()");check("JSON.parse(Native.library()).books.find(b=>b.title==='long').marks.length>=1","bookmark persisted to disk");
+    js("settings.mode='pages';persistSettings();loadWindow(0,0)");waitFor("!restoring",10000);js("turnPage(1)");check("page===1","native Android WebView page navigation");js("settings.theme='night';persistSettings()");check("document.body.dataset.theme==='night'","night settings applied");
+    js("Native.search(current.id,'轻柔')");Thread.sleep(1000);check("typeof window.receive==='function'","background full-text search completed without crash");
+    js("goHome()");runOnMainSync(()->activity.finish());launch();check("JSON.parse(Native.library()).settings.theme==='night'&&JSON.parse(Native.library()).settings.mode==='pages'","settings survive Activity recreation");check("JSON.parse(Native.library()).books.find(b=>b.title==='long').marks.length>=1","bookmarks survive Activity recreation");
+    importFile("fixture.epub");waitFor("JSON.parse(Native.library()).books.some(b=>b.images>0)",120000);js("openBook(JSON.parse(Native.library()).books.find(b=>b.images>0).id)");waitFor("!restoring",10000);js("settings.mode='scroll';persistSettings();loadWindow(0,0)");waitFor("!restoring",10000);check("current.images>0","EPUB embedded images imported");
+    js("let i=0;while(i<current.count){let b=JSON.parse(Native.range(current.id,i,1))[0];if(b.type==='image')break;i++;}loadWindow(i,0)");waitFor("[...content.querySelectorAll('img')].some(i=>i.complete&&i.naturalWidth>0)",30000);check("[...content.querySelectorAll('img')].every(i=>i.complete&&i.naturalWidth>0)","images served offline in Android WebView");
+    check("getComputedStyle(document.querySelector('.reader-head')).display==='flex'","mobile reader layout active");
+    result.putString("stream","ALL "+checks+" ANDROID CHECKS PASSED\n");finish(Activity.RESULT_OK,result);
+  }catch(Throwable e){result.putString("stream","FAIL "+android.util.Log.getStackTraceString(e));finish(Activity.RESULT_CANCELED,result);}}
+}
