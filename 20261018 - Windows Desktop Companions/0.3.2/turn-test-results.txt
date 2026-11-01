@@ -1,0 +1,2 @@
+161306 continuous-position turn checks passed across 8/16/33/40/60 ms frames, negative coordinates, both directions and repeated boundaries.
+Old edge stall reproduced before correction.

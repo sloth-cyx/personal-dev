@@ -1,0 +1,1 @@
+220 planted-feet and ground-plane checks passed across idle, wave, blink and five sizes.

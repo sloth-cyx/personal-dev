@@ -1,0 +1,1 @@
+79 motion checks passed. 72 preview renders + PNG encoding: 828 ms.

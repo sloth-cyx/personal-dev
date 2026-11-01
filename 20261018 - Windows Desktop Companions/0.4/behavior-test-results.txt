@@ -1,0 +1,2 @@
+664 behavior/transition/area checks passed.
+Input timer via GetLastInputInfo: 535.48 seconds.
