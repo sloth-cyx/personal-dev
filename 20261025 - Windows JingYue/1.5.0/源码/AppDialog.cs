@@ -1,0 +1,18 @@
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Markup;
+namespace JingYue {
+ public static class AppDialog {
+  public static MessageBoxResult Show(string message,string title){return Show(Application.Current==null?null:Application.Current.MainWindow,message,title);}
+  public static MessageBoxResult Show(Window owner,string message,string title,MessageBoxButton buttons=MessageBoxButton.OK,MessageBoxImage icon=MessageBoxImage.None,MessageBoxResult defaultResult=MessageBoxResult.OK){
+   Brush panel=new SolidColorBrush(Color.FromRgb(240,242,238)),ink=new SolidColorBrush(Color.FromRgb(41,56,49)),accent=new SolidColorBrush(Color.FromRgb(55,108,85));if(owner!=null){panel=owner.TryFindResource("Panel") as Brush??panel;ink=owner.TryFindResource("Ink") as Brush??ink;accent=owner.TryFindResource("Accent") as Brush??accent;}
+   var w=new Window{Title=title,Width=460,SizeToContent=SizeToContent.Height,MaxHeight=620,ResizeMode=ResizeMode.NoResize,ShowInTaskbar=false,WindowStartupLocation=owner!=null&&owner.IsVisible?WindowStartupLocation.CenterOwner:WindowStartupLocation.CenterScreen,Background=panel,Foreground=ink,FontFamily=new FontFamily("Microsoft YaHei UI"),FontSize=14};if(owner!=null&&owner.IsVisible)w.Owner=owner;if(owner!=null)w.Resources=owner.Resources;
+   if(w.TryFindResource(typeof(Button))==null)w.Resources.Add(typeof(Button),(Style)XamlReader.Parse(@"<Style xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' TargetType='Button'><Setter Property='Padding' Value='18,9'/><Setter Property='Margin' Value='4'/><Setter Property='Template'><Setter.Value><ControlTemplate TargetType='Button'><Border CornerRadius='10' Background='#E7EFEA' BorderBrush='#73887A' BorderThickness='1.25' Padding='{TemplateBinding Padding}'><ContentPresenter HorizontalAlignment='Center'/></Border></ControlTemplate></Setter.Value></Setter></Style>"));
+   var outer=new Border{CornerRadius=new CornerRadius(14),Padding=new Thickness(24)};var stack=new StackPanel();outer.Child=stack;w.Content=outer;var heading=new DockPanel{Margin=new Thickness(0,0,0,16)};var badge=new Border{Width=30,Height=30,CornerRadius=new CornerRadius(15),Background=accent,Margin=new Thickness(0,0,12,0)};badge.Child=new TextBlock{Text=icon==MessageBoxImage.Question?"?":icon==MessageBoxImage.Information?"i":"!",Foreground=panel,FontWeight=FontWeights.Bold,FontSize=19,HorizontalAlignment=HorizontalAlignment.Center,VerticalAlignment=VerticalAlignment.Center};heading.Children.Add(badge);heading.Children.Add(new TextBlock{Text=title,FontSize=19,VerticalAlignment=VerticalAlignment.Center});stack.Children.Add(heading);stack.Children.Add(new ScrollViewer{MaxHeight=390,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Content=new TextBlock{Text=message,TextWrapping=TextWrapping.Wrap,LineHeight=24}});var actions=new StackPanel{Orientation=Orientation.Horizontal,HorizontalAlignment=HorizontalAlignment.Right,Margin=new Thickness(0,20,0,0)};stack.Children.Add(actions);MessageBoxResult result=buttons==MessageBoxButton.YesNo?MessageBoxResult.No:MessageBoxResult.OK;
+   Action<string,MessageBoxResult,bool,bool> add=(label,value,isDefault,isCancel)=>{var button=new Button{Content=label,MinWidth=86,IsDefault=isDefault,IsCancel=isCancel};button.Click+=(s,e)=>{result=value;w.Close();};actions.Children.Add(button);};
+   if(buttons==MessageBoxButton.YesNo){add("确定",MessageBoxResult.Yes,defaultResult==MessageBoxResult.Yes,false);add("取消",MessageBoxResult.No,defaultResult!=MessageBoxResult.Yes,true);}else{add("完成",MessageBoxResult.OK,true,true);}w.ShowDialog();return result;
+  }
+ }
+}
